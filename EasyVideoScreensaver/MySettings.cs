@@ -12,6 +12,7 @@ namespace EasyVideoScreensaver
         public double Volume { get; set; }
         public Boolean Mute { get; set; }
         public Boolean Resume { get; set; }
+        public Boolean Shuffle { get; set; }
 
         public double ResumePosition { get; set; }
 

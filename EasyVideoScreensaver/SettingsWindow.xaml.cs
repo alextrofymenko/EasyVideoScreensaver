@@ -28,6 +28,7 @@ namespace EasyVideoScreensaver
             VolumeSlider.Value = settings.Volume;
             MuteCheckBox.IsChecked = settings.Mute;
             LoadResumeOption(settings, settings.VideoFilenames);
+            LoadShuffleOption(settings, settings.VideoFilenames);
 
             //Set initial focus
             VideoFilenameTextBox.Focus();
@@ -40,6 +41,7 @@ namespace EasyVideoScreensaver
             settings.Volume = VolumeSlider.Value;
             settings.Mute = MuteCheckBox.IsChecked == true;
             settings.Resume = ResumeCheckBox.IsChecked == true;
+            settings.Shuffle = ShuffleCheckBox.IsChecked == true;
             settings.Save(settingsFilename);
 
             //Close window
@@ -116,9 +118,24 @@ namespace EasyVideoScreensaver
                 ResumeCheckBox.IsChecked = settings.Resume;
             }
         }
+
+        private void LoadShuffleOption(MySettings settings, string[] files)
+        {
+            if (files.Count() > 1)
+            {
+                ShuffleCheckBox.IsEnabled = true;
+                ShuffleCheckBox.IsChecked = settings.Shuffle;
+            }
+            else
+            {
+                ShuffleCheckBox.IsEnabled = false;
+                ShuffleCheckBox.IsChecked = false;
+            }
+        }
         private void OnFileOk(object sender, CancelEventArgs e)
         {
             LoadResumeOption(settings, ((OpenFileDialog)sender).FileNames);
+            LoadShuffleOption(settings, ((OpenFileDialog)sender).FileNames);
         }
     }
 }

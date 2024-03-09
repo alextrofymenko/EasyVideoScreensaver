@@ -167,8 +167,14 @@ namespace EasyVideoScreensaver
 
         private void Media_MediaEnded(object sender, RoutedEventArgs e)
         {
-            //Loop video
-            media.Position = TimeSpan.Zero;
+            if (settings.Shuffle)
+            {
+                media.Source = new Uri(RandomVideo(settings.VideoFilenames));
+            }
+            else
+            {
+                media.Position = TimeSpan.Zero;
+            }
         }
 
     }
